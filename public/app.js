@@ -105,7 +105,6 @@ function pestana(login) {
   $('tab-login').classList.toggle('activa', login);
   $('tab-registro').classList.toggle('activa', !login);
   aviso('', false);
-  $('btn-reenviar').hidden = true;
 }
 $('tab-login').onclick = () => pestana(true);
 $('tab-registro').onclick = () => pestana(false);
@@ -116,8 +115,6 @@ $('btn-login').onclick = async () => {
     mostrarApp();
   } catch (e) {
     aviso(e.message, false);
-    correoPendiente = $('l-email').value;
-    $('btn-reenviar').hidden = !e.noVerificado;
   }
 };
 
@@ -131,15 +128,7 @@ $('btn-registro').onclick = async () => {
     });
     pestana(true);
     $('l-email').value = r.email;
-    aviso('Cuenta creada. Te enviamos un correo: confirma tu dirección y luego inicia sesión.', true);
-  } catch (e) { aviso(e.message, false); }
-};
-
-$('btn-reenviar').onclick = async () => {
-  try {
-    await api('/api/reenviar', 'POST', { email: correoPendiente });
-    aviso('Listo, te mandamos otro correo de verificación.', true);
-    $('btn-reenviar').hidden = true;
+    aviso('Cuenta creada. Ya puedes iniciar sesión.', true);
   } catch (e) { aviso(e.message, false); }
 };
 
