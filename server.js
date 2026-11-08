@@ -99,20 +99,14 @@ app.post('/api/registro', async (req, res) => {
     return res.status(400).json({ error: 'La contraseña debe tener al menos 6 caracteres.' });
 
   const correoLimpio = email.trim().toLowerCase();
-  const token = crypto.randomBytes(32).toString('hex');
   try {
-    db.prepare('INSERT INTO usuarios (nombre,email,password,rol,verificado,token_verif) VALUES (?,?,?,?,0,?)')
-      .run(nombre.trim(), correoLimpio, bcrypt.hashSync(password, 10), rol, token);
+    // verificado = 1: la cuenta queda activa de inmediato, sin correo de verificación
+    db.prepare('INSERT INTO usuarios (nombre,email,password,rol,verificado,token_verif) VALUES (?,?,?,?,1,NULL)')
+      .run(nombre.trim(), correoLimpio, bcrypt.hashSync(password, 10), rol);
   } catch {
     return res.status(400).json({ error: 'Ese correo ya está registrado.' });
   }
-  try {
-    await enviarVerificacion(correoLimpio, nombre.trim(), token);
-    res.json({ pendiente: true, email: correoLimpio });
-  } catch (e) {
-    console.error('Error al enviar correo:', e.message);
-    res.status(500).json({ error: 'Tu cuenta se creó, pero no se pudo enviar el correo. Usa "Reenviar correo" al iniciar sesión.' });
-  }
+  res.json({ ok: true, email: correoLimpio });
 });
 
 app.get('/verificar', (req, res) => {
@@ -138,8 +132,6 @@ app.post('/api/login', (req, res) => {
   const u = db.prepare('SELECT * FROM usuarios WHERE email = ?').get((email || '').trim().toLowerCase());
   if (!u || !bcrypt.compareSync(password || '', u.password))
     return res.status(400).json({ error: 'Correo o contraseña incorrectos.' });
-  if (!u.verificado)
-    return res.status(403).json({ error: 'Primero confirma tu correo. Revisa tu bandeja de entrada.', noVerificado: true });
   req.session.usuario = { id: u.id, nombre: u.nombre, rol: u.rol };
   res.json(req.session.usuario);
 });
