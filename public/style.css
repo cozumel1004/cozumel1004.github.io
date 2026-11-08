@@ -1,0 +1,91 @@
+:root{
+  --tinta:#12343b; --fondo:#eef2f1; --papel:#ffffff; --etiqueta:#ffd23f;
+  --linea:#cfd9d7; --suave:#5b7176; --error:#b3261e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);
+  font-family:'Archivo','Segoe UI',system-ui,sans-serif;line-height:1.45}
+h1,h2{margin:0}
+label{display:block;font-size:.9rem;font-weight:600;margin-bottom:.8rem}
+input,textarea{display:block;width:100%;margin-top:.3rem;padding:.65rem .75rem;font:inherit;
+  border:1.5px solid var(--linea);border-radius:6px;background:#fff;color:var(--tinta)}
+input:focus,textarea:focus,button:focus-visible{outline:3px solid var(--etiqueta);outline-offset:1px;border-color:var(--tinta)}
+button{font:inherit;cursor:pointer}
+.primario{width:100%;padding:.8rem;border:0;border-radius:6px;background:var(--tinta);color:#fff;font-weight:700}
+.primario:hover{background:#0b2227}
+.error{color:var(--error);min-height:1.2em;margin:.8rem 0 0;font-size:.9rem}
+
+.acceso{max-width:430px;margin:0 auto;padding:3rem 1.2rem}
+.acceso h1{font-size:2.4rem;letter-spacing:-.02em}
+.lema{color:var(--suave);margin:.3rem 0 1.6rem}
+.tarjeta{background:var(--papel);border:1.5px solid var(--linea);border-radius:10px;padding:1.4rem;margin-bottom:1.2rem}
+.pestanas{display:flex;gap:.4rem;margin-bottom:1.2rem}
+.pestanas button{flex:1;padding:.6rem;border:1.5px solid var(--linea);background:#fff;border-radius:6px;font-weight:600;color:var(--suave)}
+.pestanas .activa{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+fieldset{border:0;padding:0;margin:0 0 1rem}
+legend{font-weight:600;font-size:.9rem;margin-bottom:.5rem}
+.opcion{display:flex;gap:.7rem;align-items:flex-start;border:1.5px solid var(--linea);border-radius:8px;padding:.7rem;font-weight:400;cursor:pointer}
+.opcion input{width:auto;margin:.25rem 0 0}
+.opcion b{display:block}
+.opcion:has(input:checked){border-color:var(--tinta);background:#f4faf9}
+
+.barra{display:flex;align-items:center;gap:1rem;padding:.8rem 1.2rem;background:var(--tinta);color:#fff;position:sticky;top:0;z-index:5}
+.barra strong{font-size:1.1rem;margin-right:auto}
+.barra button{background:transparent;color:#fff;border:1.5px solid #ffffff80;border-radius:6px;padding:.35rem .8rem}
+.feed{max-width:640px;margin:0 auto;padding:1.4rem 1rem 3rem}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.titulo-feed{margin:1.6rem 0 .9rem;font-size:1.2rem}
+
+.oferta{background:var(--papel);border:1.5px solid var(--linea);border-radius:10px;padding:1.1rem;margin-bottom:1rem;
+  display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem}
+.oferta h3{margin:0;font-size:1.15rem}
+.quien{color:var(--suave);font-size:.85rem}
+.precio{grid-row:1 / span 2;grid-column:2;align-self:start;background:var(--etiqueta);color:#2a2200;
+  padding:.5rem .8rem;border-radius:4px 14px 14px 4px;text-align:right;font-weight:800;font-size:1.4rem;line-height:1.1}
+.precio small{display:block;font-size:.7rem;font-weight:600}
+.oferta p{grid-column:1 / -1;margin:.4rem 0 0}
+.pie{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.5rem;padding-top:.7rem;border-top:1px solid var(--linea)}
+.contacto{font-weight:700;color:var(--tinta)}
+.borrar{margin-left:auto;background:none;border:0;color:var(--error);font-size:.85rem;text-decoration:underline}
+.vacio{text-align:center;color:var(--suave);padding:2rem 1rem;border:2px dashed var(--linea);border-radius:10px}
+@media(max-width:480px){.fila{grid-template-columns:1fr}}
+
+.enlace{background:none;border:0;padding:0;margin-top:.5rem;color:var(--tinta);font-weight:600;text-decoration:underline}
+.ok{color:#0b6b3a;min-height:1.2em;margin:.8rem 0 0;font-size:.9rem;font-weight:600}
+.etiqueta-rol{display:inline-block;margin-left:.4rem;padding:.05rem .45rem;border:1.5px solid var(--linea);border-radius:20px;font-size:.75rem}
+
+.logo{width:2rem;height:2rem;flex:none}
+.marca{display:flex;align-items:center;gap:.55rem}
+.marca-grande{display:flex;align-items:center;gap:.7rem}
+.marca-grande .logo{width:3.2rem;height:3.2rem}
+body::after{content:"";position:fixed;right:-70px;bottom:-70px;width:380px;height:380px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M6 8h22l14 16-14 16H6z' fill='%23ffd23f' stroke='%2312343b' stroke-width='2.5' stroke-linejoin='round'/%3E%3Ccircle cx='13' cy='24' r='2.8' fill='%2312343b'/%3E%3Cpath d='M27 15l8 4.5-8 4.5-8-4.5z' fill='%234f8f98'/%3E%3Cpath d='M19 19.5l8 4.5v9l-8-4.5z' fill='%2312343b'/%3E%3Cpath d='M35 19.5l-8 4.5v9l8-4.5z' fill='%232b6670'/%3E%3C/svg%3E") no-repeat center/contain;opacity:.08;pointer-events:none;z-index:-1}
+
+.fab{position:fixed;left:50%;bottom:1.2rem;transform:translateX(-50%);z-index:8;
+  padding:.9rem 2rem;border:0;border-radius:40px;background:var(--etiqueta);color:#2a2200;
+  font-weight:800;font-size:1.05rem;box-shadow:0 4px 14px rgba(18,52,59,.35)}
+.fab:hover{background:#ffdc66}
+.fab[hidden]{display:none}
+.feed{padding-bottom:6rem}
+
+.modal{border:0;border-radius:12px;padding:0;width:calc(100% - 2rem);max-width:480px;color:var(--tinta)}
+.modal::backdrop{background:rgba(18,52,59,.6)}
+.modal-cuerpo{padding:1.4rem}
+.acciones{display:flex;gap:.7rem}
+.secundario{flex:1;padding:.8rem;border:1.5px solid var(--linea);border-radius:6px;background:#fff;color:var(--tinta);font-weight:600}
+.acciones .primario{flex:2}
+
+.borrar{padding:.35rem .8rem;border:1.5px solid var(--error);border-radius:6px;text-decoration:none;font-weight:600}
+.borrar:hover{background:var(--error);color:#fff}
+
+select{display:block;width:100%;margin-top:.3rem;padding:.65rem .75rem;font:inherit;border:1.5px solid var(--linea);border-radius:6px;background:#fff;color:var(--tinta)}
+select:focus{outline:3px solid var(--etiqueta);outline-offset:1px;border-color:var(--tinta)}
+.modal{max-height:calc(100dvh - 2rem);overflow-y:auto}
+.vista-previa{display:block;width:100%;max-height:220px;object-fit:cover;border-radius:8px;margin:-.2rem 0 1rem}
+.foto{grid-column:1 / -1;width:100%;max-height:340px;object-fit:cover;border-radius:8px;margin-top:.6rem;background:var(--fondo)}
+.vendedor{background:none;border:0;padding:0;font:inherit;font-size:.85rem;font-weight:700;color:var(--tinta);text-decoration:underline}
+.zona{color:var(--suave)}
+.barra #quien{max-width:45vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.perfil h2{margin-top:.8rem;display:inline-block}
+.perfil .etiqueta-rol{margin-left:.6rem}
+.perfil p{margin:.6rem 0 0;color:var(--suave)}

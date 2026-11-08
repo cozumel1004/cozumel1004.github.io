@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayoreo Directo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M6 8h22l14 16-14 16H6z' fill='%23ffd23f' stroke='%2312343b' stroke-width='2.5' stroke-linejoin='round'/%3E%3Ccircle cx='13' cy='24' r='2.8' fill='%2312343b'/%3E%3Cpath d='M27 15l8 4.5-8 4.5-8-4.5z' fill='%234f8f98'/%3E%3Cpath d='M19 19.5l8 4.5v9l-8-4.5z' fill='%2312343b'/%3E%3Cpath d='M35 19.5l-8 4.5v9l8-4.5z' fill='%232b6670'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main id="vista-acceso" class="acceso">
+  <h1 class="marca-grande"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 8h22l14 16-14 16H6z" fill="#ffd23f" stroke="#12343b" stroke-width="2.5" stroke-linejoin="round"/><circle cx="13" cy="24" r="2.8" fill="#12343b"/><path d="M27 15l8 4.5-8 4.5-8-4.5z" fill="#4f8f98"/><path d="M19 19.5l8 4.5v9l-8-4.5z" fill="#12343b"/><path d="M35 19.5l-8 4.5v9l8-4.5z" fill="#2b6670"/></svg><span>Mayoreo Directo</span></h1>
+  <p class="lema">Ofertas de mayoreo publicadas por quien las vende.</p>
+
+  <div class="tarjeta">
+    <div class="pestanas">
+      <button id="tab-login" class="activa" type="button">Iniciar sesión</button>
+      <button id="tab-registro" type="button">Crear cuenta</button>
+    </div>
+
+    <div id="form-login">
+      <label>Correo <input id="l-email" type="email" autocomplete="email"></label>
+      <label>Contraseña <input id="l-pass" type="password" autocomplete="current-password"></label>
+      <button class="primario" id="btn-login" type="button">Entrar</button>
+    </div>
+
+    <div id="form-registro" hidden>
+      <label>Nombre <input id="r-nombre" autocomplete="name"></label>
+      <label>Correo <input id="r-email" type="email" autocomplete="email"></label>
+      <label>Contraseña (mínimo 6 caracteres) <input id="r-pass" type="password" autocomplete="new-password"></label>
+      <fieldset>
+        <legend>¿Qué quieres ser?</legend>
+        <label class="opcion"><input type="radio" name="rol" value="mayorista">
+          <span><b>Vendedor a mayoreo</b>Publico ofertas de mis productos.</span></label>
+        <label class="opcion"><input type="radio" name="rol" value="consumidor" checked>
+          <span><b>Consumidor</b>Busco ofertas y contacto a los vendedores.</span></label>
+      </fieldset>
+      <button class="primario" id="btn-registro" type="button">Crear cuenta</button>
+    </div>
+    <p id="msg-acceso" class="error" role="alert"></p>
+    <button id="btn-reenviar" class="enlace" type="button" hidden>Reenviar correo de verificación</button>
+  </div>
+</main>
+
+<div id="vista-app" hidden>
+  <header class="barra">
+    <strong class="marca"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 8h22l14 16-14 16H6z" fill="#ffd23f" stroke="#12343b" stroke-width="2.5" stroke-linejoin="round"/><circle cx="13" cy="24" r="2.8" fill="#12343b"/><path d="M27 15l8 4.5-8 4.5-8-4.5z" fill="#4f8f98"/><path d="M19 19.5l8 4.5v9l-8-4.5z" fill="#12343b"/><path d="M35 19.5l-8 4.5v9l8-4.5z" fill="#2b6670"/></svg>Mayoreo Directo</strong>
+    <button id="quien" type="button" title="Ver mi perfil"></button>
+    <button id="btn-salir" type="button">Salir</button>
+  </header>
+
+  <main class="feed">
+
+    <div id="perfil-cabecera" class="tarjeta perfil" hidden>
+      <button id="btn-volver" class="enlace" type="button">← Volver a las ofertas</button>
+      <h2 id="perfil-nombre"></h2>
+      <span id="perfil-rol" class="etiqueta-rol"></span>
+      <p id="perfil-resumen"></p>
+    </div>
+    <h2 class="titulo-feed" id="titulo-feed">Ofertas recientes</h2>
+    <div id="lista"></div>
+  </main>
+</div>
+
+<dialog id="modal-publicar" class="modal">
+  <div class="modal-cuerpo">
+      <h2>Publicar una oferta</h2>
+      <label>¿Qué vas a vender? <input id="o-producto" placeholder="Ej. Cajas de aguacate"></label>
+      <div class="fila">
+        <label>¿Cuánto? <input id="o-cantidad" type="number" min="0" step="any" placeholder="500"></label>
+        <label>Se vende por
+          <select id="o-unidad">
+            <option value="kg">Kilogramos</option>
+            <option value="litros">Litros</option>
+            <option value="cantidad" selected>Cantidad (piezas)</option>
+          </select>
+        </label>
+      </div>
+      <label><span id="lbl-precio">Precio por pieza (MXN)</span> <input id="o-precio" type="number" min="0" step="0.01" placeholder="12.50"></label>
+      <label>¿En qué zona te encuentras? <input id="o-zona" maxlength="80" placeholder="Ej. Centro, Felipe Carrillo Puerto"></label>
+      <label>Detalles (opcional) <textarea id="o-desc" rows="2" placeholder="Calidad, zona de entrega, mínimo de compra..."></textarea></label>
+      <label>Tu número de contacto <input id="o-contacto" type="tel" placeholder="998 123 4567"></label>
+      <label>Foto (opcional) <input id="o-foto" type="file" accept="image/*"></label>
+      <img id="o-vista" class="vista-previa" alt="Vista previa de la foto" hidden>
+      <div class="acciones"><button class="secundario" id="btn-cancelar" type="button">Cancelar</button>
+        <button class="primario" id="btn-publicar" type="button">Publicar</button></div>
+      <p id="msg-oferta" class="error" role="alert"></p>
+    </div>
+</dialog>
+
+<button id="btn-abrir-publicar" class="fab" type="button" hidden>+ Publicar</button>
+
+<script src="app.js"></script>
+</body>
+</html>
