@@ -1,5 +1,5 @@
 :root{
-  --tinta:#A6F527; --fondo:#eef2f1; --papel:#A6F527; --etiqueta:#A6F527;
+  --tinta:#37D4A8; --fondo:#eef2f1; --papel:#A6F527; --etiqueta:#37D4A8;
   --linea:#cfd9d7; --suave:#5b7176; --error:#b3261e;
 }
 *{box-sizing:border-box}
