@@ -3,7 +3,7 @@
   --linea:#cfd9d7; --suave:#5b7176; --error:#b3261e;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--fondo);color:var(--tinta);
+body{margin:0;background:var(--fondo);color:var#000000;
   font-family:'Archivo','Segoe UI',system-ui,sans-serif;line-height:1.45}
 h1,h2{margin:0}
 label{display:block;font-size:.9rem;font-weight:600;margin-bottom:.8rem}
