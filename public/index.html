@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intercambio de Raíces</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🥭%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main id="vista-acceso" class="login">
+  <div class="lcard">
+    <div class="lleft">
+      <span class="pill"><i></i>RED MAYA BIO-CULTURAL</span>
+      <div class="hero"><img src="campo.jpg" alt="Productores cosechando en un campo con montañas al fondo"></div>
+      <h2>El valor justo del trabajo colectivo</h2>
+      <p>Unimos las raíces de la zona maya con quienes buscan comercio local, justo y transparente.</p>
+      <div class="feat"><b>Mayoreo directo</b><span>Fruta por kilo, sin intermediarios.</span></div>
+      <div class="feat"><b>Local</b><span>Productos por unidad: miel, conservas y más.</span></div>
+      <div class="feat"><b>Contacto directo</b><span>Habla con quien produce, por WhatsApp o teléfono.</span></div>
+    </div>
+    <div class="lright">
+      <div class="eyebrow">🔒 PORTAL DE ACCESO SEGURO</div>
+      <h1>Intercambio de Raíces</h1>
+      <p class="sub">Selecciona tu perfil de usuario para acceder.</p>
+      <div class="tabs" id="roles">
+        <button type="button" data-rol="consumidor" class="on">🛒 Comprador</button>
+        <button type="button" data-rol="mayorista">🌱 Comerciante</button>
+      </div>
+      <div class="maya">U ti’al mola’ayo’ob, j-kaab melipona, x-ch’uupo’ob xokbil chuuy yéetel che’ob.</div>
+      <div id="campo-nombre" hidden>
+        <label for="a-nombre">Nombre o cooperativa</label>
+        <input id="a-nombre" autocomplete="name">
+      </div>
+      <label for="a-email">Correo electrónico</label>
+      <input id="a-email" type="email" autocomplete="email" placeholder="ej. apicultores@coopmaya.org">
+      <label for="a-pass">Contraseña de acceso</label>
+      <input id="a-pass" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres">
+      <button class="primario" id="btn-acceso" type="button">Ooken Ichil Portal B2B →</button>
+      <p id="msg-acceso" class="error" role="alert"></p>
+      <p class="centro"><button id="btn-modo" class="enlace" type="button">¿Aún no formas parte? Regístrate aquí</button></p>
+    </div>
+  </div>
+</main>
+
+<div id="vista-app" hidden>
+  <header class="barra">
+    <strong class="marca" id="marca">Intercambio de Raíces<small>Comercio Justo</small></strong>
+    <input id="buscar" class="buscar" type="search" placeholder="Buscar mango, papaya, miel melipona…">
+    <button id="btn-abrir-publicar" class="crear" type="button" hidden>＋ Crear</button>
+    <button id="btn-menu" class="hamb" type="button" aria-label="Menú">☰</button>
+  </header>
+  <nav id="menu" class="menu" hidden></nav>
+
+  <main class="feed">
+    <div id="perfil-cabecera" class="tarjeta perfil" hidden>
+      <button id="btn-volver" class="enlace" type="button">← Volver</button>
+      <div class="perfil-fila">
+        <div class="avatar" id="perfil-avatar"></div>
+        <div style="flex:1">
+          <h2 id="perfil-nombre"></h2>
+          <span id="perfil-rol" class="etiqueta-rol"></span>
+          <p id="perfil-resumen"></p>
+        </div>
+        <button id="btn-rol-perfil" class="secundario chico" type="button" hidden></button>
+      </div>
+    </div>
+    <h2 class="titulo-feed" id="titulo-feed"></h2>
+    <div id="lista"></div>
+  </main>
+</div>
+
+<dialog id="modal-publicar" class="modal">
+  <div class="modal-cuerpo">
+    <h2>Nueva publicación</h2>
+    <div class="seg">
+      <button type="button" class="on" data-tipo="mayoreo">🍎 Mayoreo (por kilo)</button>
+      <button type="button" data-tipo="local">🍯 Local (por unidad)</button>
+    </div>
+    <label>Producto <input id="o-producto" placeholder="Ej. Mango Ataulfo"></label>
+    <div class="fila">
+      <label>Cantidad disponible <input id="o-cantidad" type="number" min="0" step="any"></label>
+      <label id="caja-unidad">Se vende por
+        <select id="o-unidad">
+          <option value="kg">Kilogramos</option>
+          <option value="litros">Litros</option>
+          <option value="cantidad">Cantidad (piezas)</option>
+        </select>
+      </label>
+    </div>
+    <div class="fila">
+      <label><span id="lbl-precio">Precio por kilo (MXN)</span> <input id="o-precio" type="number" min="0" step="0.01"></label>
+      <label>Pedido mínimo <input id="o-minimo" type="number" min="1" step="any" value="1"></label>
+    </div>
+    <label>Zona en la que te encuentras <input id="o-zona" maxlength="80" placeholder="Ej. Felipe Carrillo Puerto"></label>
+    <label>Detalles (opcional) <textarea id="o-desc" rows="2" placeholder="Variedad, calidad, entrega…"></textarea></label>
+    <label>Tu número de contacto / WhatsApp <input id="o-contacto" type="tel" placeholder="998 123 4567"></label>
+    <label>Fotos (hasta 3) <input id="o-foto" type="file" accept="image/*" multiple></label>
+    <div id="o-vistas" class="vistas"></div>
+    <div class="acciones"><button class="secundario" id="btn-cancelar" type="button">Cancelar</button>
+      <button class="primario" id="btn-publicar" type="button">Publicar</button></div>
+    <p id="msg-oferta" class="error" role="alert"></p>
+  </div>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
